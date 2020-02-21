@@ -200,6 +200,11 @@ function loginUser(request, response) {
 			message: 'Usuario incorrecto'
 		})
 
+		if(!params.password) return response.status(404).send({
+			status: 404,
+			message: 'Password requerido'
+		})
+
 		if (!bcrypt.compareSync(params.password, user.password)) {
 			return response.status(404).send({
 				status: 404,

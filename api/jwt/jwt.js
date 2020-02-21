@@ -13,7 +13,7 @@ function createToken(user) {
         edad: user.edad,
         estadoCivil: user.estadoCivil,
         iat: moment().unix(),
-        exp: moment().add(5, 'minutes').unix()
+        exp: moment().add(2, 'days').unix()
     }
 
     return jwt.encode(payload, secret_word);
