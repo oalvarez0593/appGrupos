@@ -156,6 +156,32 @@ function getUsers(request, response) {
 	});
 }
 
+function getUsuarioMatch(request, response) {
+	let palabra = request.params.palabra;
+	console.log(palabra);
+    let regex = new RegExp(palabra, 'i');
+
+    User.find({ name: regex }).exec((err, users) => {
+        if (err) return response.status(500).send({
+            status: 500,
+            message: 'Error en el servidor',
+            er: err
+        });
+
+        if (!users || users.length === 0) {
+            return response.status(404).send({
+                status: 404,
+                message: `No se encontró ningún registro con el nombre: ${regex}`
+            });
+        }
+
+        response.status(200).send({
+            status: 200,
+            user: users
+        })
+    });
+}
+
 function deleteUser(request, response) {
 	let userId = request.params.id;
 
@@ -226,6 +252,7 @@ module.exports = {
 	createUser,
 	updateUser,
 	getUsers,
+	getUsuarioMatch,
 	deleteUser,
 	loginUser
 }
