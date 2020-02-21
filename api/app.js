@@ -5,6 +5,7 @@ var app = express();
 /* *****************************  	CARGAR RUTAS 	******************************** */
 
 var user_routes = require('./routes/user');
+var grupos_routes = require('./routes/grupos');
 
 /* *****************************  	CARGAR MIDDLEWARES 	******************************** */
 
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 /* *****************************  	 RUTAS 	******************************** */
 
 app.use('/api',user_routes);
+app.use('/api',grupos_routes);
 
 /* *****************************  	EXPORTAR 	******************************** */
 
